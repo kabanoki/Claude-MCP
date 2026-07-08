@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "php-sample": {
+      "type": "http",
+      "url": "https://infants-unified-insulin-publish.trycloudflare.com/mcp-server.php"
+    }
+  }
+}
