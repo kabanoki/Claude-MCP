@@ -2,7 +2,7 @@
   "mcpServers": {
     "php-sample": {
       "type": "http",
-      "url": "https://imagine-adopted-initial-stroke.trycloudflare.com/mcp-server.php"
+      "url": "https://portraits-surveys-bytes-albums.trycloudflare.com/mcp-server.php"
     }
   }
 }

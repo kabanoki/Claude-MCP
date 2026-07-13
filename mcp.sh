@@ -22,8 +22,9 @@ start_php() {
     if pgrep -f "php -S localhost:$port" > /dev/null; then
         echo "  localhost:$port : 既に稼働中"
     else
-        nohup php -S "localhost:$port" > "$LOG_DIR/php-$port.log" 2>&1 &
-        echo "  localhost:$port : 起動しました (PID $!)"
+        # setsidで起動元のセッションから切り離す（親プロセス終了の巻き添えを防ぐ）
+        setsid nohup php -S "localhost:$port" > "$LOG_DIR/php-$port.log" 2>&1 < /dev/null &
+        echo "  localhost:$port : 起動しました"
     fi
 }
 
@@ -40,8 +41,8 @@ cmd_start() {
     # 既存トンネルは停止（URLが変わるため作り直す）
     pkill -f 'cloudflared tunnel' 2>/dev/null && sleep 1 || true
     : > "$TUNNEL_LOG"
-    nohup "$CLOUDFLARED" tunnel --url http://localhost:8000 > "$TUNNEL_LOG" 2>&1 &
-    echo "  cloudflared起動 (PID $!) — URL発行を待機中..."
+    setsid nohup "$CLOUDFLARED" tunnel --url http://localhost:8000 > "$TUNNEL_LOG" 2>&1 < /dev/null &
+    echo "  cloudflared起動 — URL発行を待機中..."
 
     # URLが発行されるまで最大30秒待つ
     local url=""
