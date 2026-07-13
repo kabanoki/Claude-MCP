@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__php-sample__get_data",
+      "mcp__php-sample__post_data"
+    ]
+  }
+}
