@@ -23,6 +23,20 @@ Claude ──(MCP / JSON-RPC over HTTP)──> mcp-server.php ──(HTTP GET/PO
 
 ## 起動方法
 
+### 一括起動スクリプト（推奨）
+
+```sh
+./mcp.sh start    # PHPサーバー2つ + cloudflaredトンネル起動 + .mcp.json自動更新 + 疎通確認
+./mcp.sh status   # 稼働状況と現在の公開URL、.mcp.jsonとの同期状態を表示
+./mcp.sh stop     # すべて停止
+```
+
+トンネルURLは起動のたびに変わるが、`start` が `.mcp.json` を自動で書き換える。
+実行後に表示される案内に従い、ルーチンで使う場合は `git push`、
+claude.aiコネクタで使う場合はコネクタ設定のURLを更新すること。
+
+### 手動起動
+
 ターミナルを2つ使い、それぞれのポートで起動する:
 
 ```sh
